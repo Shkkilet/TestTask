@@ -1,0 +1,65 @@
+﻿@model Api.Models.AboutViewModel
+
+@{
+    ViewData["Title"] = "About";
+}
+
+<link rel="stylesheet" href="~/css/about.css" />
+
+<div class="about-container">
+
+    <a href="http://localhost:4200/table" class="back-button">
+        ← Back to table
+    </a>
+
+    <h1>About URL Shortener</h1>
+
+    @if (User.IsInRole("Admin"))
+    {
+        <form asp-controller="About"
+              asp-action="Index"
+              method="post">
+
+            @Html.AntiForgeryToken()
+
+            <div>
+                <label for="content">
+                    URL Shortener algorithm description
+                </label>
+
+                <textarea id="content"
+                          name="content"
+                          rows="20">@Model.Content</textarea>
+            </div>
+
+            @if (ViewData.ModelState["content"]?.Errors.Count > 0)
+            {
+                <p class="error">
+                    @ViewData.ModelState["content"]?.Errors[0].ErrorMessage
+                </p>
+            }
+
+            <button type="submit">
+                Save
+            </button>
+
+        </form>
+    }
+    else
+    {
+        <div class="about-content">
+            @foreach (var paragraph in Model.Content.Split(
+                Environment.NewLine + Environment.NewLine,
+                StringSplitOptions.RemoveEmptyEntries))
+            {
+                <p>@paragraph</p>
+            }
+        </div>
+    }
+
+    <p>
+        Last updated:
+        @Model.UpdatedDate.ToLocalTime().ToString("g")
+    </p>
+
+</div>

@@ -1,0 +1,71 @@
+﻿.about-container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 20px;
+    font-family: Arial, sans-serif;
+}
+
+    .about-container h1 {
+        margin-bottom: 30px;
+    }
+
+    .about-container label {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: 600;
+    }
+
+    .about-container textarea {
+        width: 100%;
+        min-height: 400px;
+        padding: 12px;
+        box-sizing: border-box;
+        resize: vertical;
+        font-family: inherit;
+        font-size: 15px;
+        line-height: 1.5;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+    }
+
+    .about-container button {
+        margin-top: 15px;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 15px;
+    }
+
+.about-content {
+    line-height: 1.7;
+    font-size: 16px;
+}
+
+    .about-content p {
+        margin-bottom: 20px;
+    }
+
+.error {
+    color: #dc2626;
+    margin-top: 10px;
+}
+
+.last-updated {
+    margin-top: 30px;
+    color: #666;
+    font-size: 14px;
+}
+.back-button {
+    display: inline-block;
+    margin-bottom: 20px;
+    padding: 10px 16px;
+    background-color: #f3f4f6;
+    color: #333;
+    text-decoration: none;
+    border-radius: 6px;
+}
+
+    .back-button:hover {
+        background-color: #e5e7eb;
+    }
