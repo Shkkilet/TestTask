@@ -1,0 +1,72 @@
+<h2>Short URLs</h2>
+
+@if (auth.isAuthenticated()) {
+  <div class="card">
+    <h3 style="margin-top:0;">Add new Url</h3>
+    <form (ngSubmit)="addUrl()" style="display:flex; gap:0.5rem;">
+      <input
+        name="newUrl"
+        [(ngModel)]="newUrl"
+        placeholder="https://example.com/some/long/path"
+        style="flex:1; padding:0.5rem;"
+        required
+      />
+      <button type="submit" [disabled]="isAdding()">
+        {{ isAdding() ? 'Adding…' : 'Shorten' }}
+      </button>
+    </form>
+    @if (addError()) {
+      <p class="error">{{ addError() }}</p>
+    }
+  </div>
+}
+
+<div class="card">
+  @if (isLoading()) {
+    <p>Loading…</p>
+  } @else if (loadError()) {
+    <p class="error">{{ loadError() }}</p>
+  } @else if (urls().length === 0) {
+    <p>No short URLs yet.</p>
+  } @else {
+    <table>
+      <thead>
+        <tr>
+          <th>Original URL</th>
+          <th>Short URL</th>
+          <th>Created By</th>
+          <th>Created Date</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (item of urls(); track item.id) {
+          <tr>
+            <td style="max-width:280px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+              {{ item.originalUrl }}
+            </td>
+            <td>
+              <a [href]="item.shortUrl" target="_blank" rel="noopener">{{ item.shortUrl }}</a>
+            </td>
+            <td>{{ item.createdByUserName }}</td>
+            <td>{{ item.createdDate | date: 'short' }}</td>
+            <td style="display:flex; gap:0.5rem;">
+              @if (auth.isAuthenticated()) {
+                <button (click)="viewDetails(item)">View</button>
+              }
+              @if (auth.isAdmin() || item.canDelete) {
+                <button
+                  class="danger"
+                  (click)="deleteUrl(item)"
+                  [disabled]="deletingId() === item.id"
+                >
+                  {{ deletingId() === item.id ? 'Deleting…' : 'Delete' }}
+                </button>
+              }
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+</div>

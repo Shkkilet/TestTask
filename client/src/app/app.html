@@ -1,0 +1,19 @@
+<header style="display:flex; align-items:center; justify-content:space-between; padding:1rem 1.5rem; background:#111827; color:white;">
+  <nav style="display:flex; gap:1.25rem; align-items:center;">
+    <a routerLink="/table" style="color:white; font-weight:600; text-decoration:none;">URL Shortener</a>
+    <a routerLink="/table" routerLinkActive="active-link" style="color:#d1d5db; text-decoration:none;">Short URLs</a>
+    <a style="color:#d1d5db; text-decoration:none;" href="https://localhost:7010/About">About</a>
+  </nav>
+
+  <div style="display:flex; gap:0.75rem; align-items:center;">
+    @if (auth.isAuthenticated()) {
+      <button (click)="onLogout()">Logout</button>
+    } @else {
+      <a routerLink="/login" style="color:white;">Login</a>
+    }
+  </div>
+</header>
+
+<main style="max-width: 960px; margin: 1.5rem auto; padding: 0 1rem;">
+  <router-outlet />
+</main>

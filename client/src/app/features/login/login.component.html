@@ -1,0 +1,23 @@
+<div class="card" style="max-width: 360px; margin: 2rem auto;">
+  <h2>Login</h2>
+
+  <form (ngSubmit)="submit()" #form="ngForm">
+    <div style="margin-bottom: 0.75rem;">
+      <label>Login</label><br />
+      <input name="userName" [(ngModel)]="userName" required style="width:100%; padding:0.5rem;" />
+    </div>
+
+    <div style="margin-bottom: 0.75rem;">
+      <label>Password</label><br />
+      <input name="password" type="password" [(ngModel)]="password" required style="width:100%; padding:0.5rem;" />
+    </div>
+
+    @if (errorMessage()) {
+      <p class="error">{{ errorMessage() }}</p>
+    }
+
+    <button type="submit" [disabled]="isSubmitting()">
+      {{ isSubmitting() ? 'Signing in…' : 'Authorize' }}
+    </button>
+  </form>
+</div>
